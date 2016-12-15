@@ -23,22 +23,26 @@
           var data = new google.visualization.DataTable();
 
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'temp');
-          data.addColumn('number', 'humidity');
+          data.addColumn('number', 'temp (C)');
 
           $.each(results, function (i, row) {
             data.addRow([
               (new Date(row.timestamp)),
-              parseFloat(row.temp),
-              parseFloat(row.humidity)
+              parseFloat(row.temp)
             ]);
           });
 
-          var chart = new google.visualization.LineChart($('#chart').get(0));
+          var chart = new google.visualization.LineChart($('#temp').get(0));
 
-          chart.draw(data, {
-            title: 'King Lab Node 2'
-          });
+             var options = {
+            title: 'Temperature',
+          series: {
+            0: { color: '#e2431e' },
+          }
+        };
+
+
+          chart.draw(data, options);
 
         });
 
@@ -54,8 +58,115 @@
 
     </script>
 
+  <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'E4eJMerOjZIADxqKOL2DiXpoax6';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'http://159.203.128.53/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'humidity (%RH)');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#humidity').get(0));
+
+             var options = {
+            title: 'Humidity',
+          series: {
+            0: { color: 'blue' },
+          }
+        };
+
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+<script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'E4eJMerOjZIADxqKOL2DiXpoax6';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'http://159.203.128.53/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'pressure (hPa)');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.pressure)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#pressure').get(0));
+
+           var options = {
+            title: 'Pressure',
+          series: {
+            0: { color: 'green' },
+          }
+        };
+
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+
   </head>
   <body>
-    <div id="chart" style="width: 100%;"></div>
+    <div id="temp" style="width: 100%;"></div>
+<div id="humidity" style="width: 100%;"></div>
+<div id="pressure" style="width: 100%;"></div>
   </body>
 </html>
