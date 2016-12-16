@@ -38,16 +38,8 @@
             title: 'Temp',
           series: {
             0: { color: '#e2431e' },
-
-vAxis: { 
-    viewWindowMode: 'explicit',
-    viewWindow: {
-        min:10,
-        max: 18
-    },
           }
         };
-
 
 
           chart.draw(data, options);
@@ -96,13 +88,6 @@ vAxis: {
 
              var options = {
             title: 'Humidity',
-
-vAxis: { 
-    viewWindowMode: 'explicit',
-    viewWindow: {
-        min:10,
-        max: 25
-    },
           series: {
             0: { color: 'blue' },
           }
@@ -156,12 +141,9 @@ vAxis: {
            var options = {
             title: 'Pressure',
 vAxis: { 
-    viewWindowMode: 'explicit',
-    viewWindow: {
-        min:900,
-        max: 1100
-    }
-},
+          viewWindowMode:'explicit',
+          viewWindow:{ min:900, max :1100 },
+
           series: {
             0: { color: 'green' },
           }
