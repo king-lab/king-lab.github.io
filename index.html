@@ -136,6 +136,17 @@
             ]);
           });
 
+ var rangeFliter = new google.visualization.ControlWrapper({
+                    'controlType': 'DateRangeFilter',
+                    'containerId': 'filter_div',
+                    'options': {
+                        'filterColumnLabel': 'Closed Date'  
+                    },
+                    //this will set the default range based on the values you provide
+                    'state': {'lowValue': new Date(2016, 0, 11), 'highValue': new Date(2016, 1, 1)}
+                }); 
+
+
           var chart = new google.visualization.LineChart($('#pressure').get(0));
 
            var options = {
